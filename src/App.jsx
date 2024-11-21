@@ -71,19 +71,38 @@ function App() {
     }
   };
 
+  const derivedDiff = (difficulty) => {
+    let dff;
+    if (difficulty === 5) {
+      return (dff = "easy");
+    } else if (difficulty == 10) {
+      return (dff = "medium");
+    } else {
+      return (dff = "hard");
+    }
+  };
+
   return (
     <>
-      <h3>Select Difficulty</h3>
-      <div className="h4" onClick={() => handleDifficulty(5)}>
-        easy
+      <div className="headcontainer">
+        <h3 className="select">Select Difficulty</h3>
+        <div className="diffbutton">
+          <div className="h4" onClick={() => handleDifficulty(5)}>
+            easy
+          </div>
+          <div className="h4" onClick={() => handleDifficulty(10)}>
+            medium
+          </div>
+          <div className="h4" onClick={() => handleDifficulty(20)}>
+            hard
+          </div>
+        </div>
+        <h2 className="h4" onClick={HandleStartGame}>
+          Start Game
+        </h2>
+        <h3>Difficulty selected:{derivedDiff}</h3>
       </div>
-      <div className="h4" onClick={() => handleDifficulty(10)}>
-        medium
-      </div>
-      <div className="h4" onClick={() => handleDifficulty(20)}>
-        hard
-      </div>
-      <h2 onClick={HandleStartGame}>Start Game</h2>
+
       <h2>Score:{clickedcard.length}</h2>
       <h2>Highest Score:{highest}</h2>
       {modal && <Modal score={score} />}
