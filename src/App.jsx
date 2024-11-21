@@ -10,6 +10,7 @@ function App() {
   const [clickedcard, setClickedcard] = useState([]);
   const [difficulty, setDifficulty] = useState();
   const [modal, setModal] = useState(false);
+  const [startgame, setStartgame] = useState(false);
 
   // const handleClick = () => {
   //   setScore((c) => c + 1);
@@ -39,6 +40,7 @@ function App() {
 
   const HandleStartGame = () => {
     getCard(difficulty);
+    setStartgame(true);
   };
 
   function shuffle(array) {
@@ -61,6 +63,7 @@ function App() {
     if (clickedcard.includes(n)) {
       console.log("game over");
       setModal(true);
+      setStartgame(true);
 
       setClickedcard([]);
     } else {
@@ -73,7 +76,7 @@ function App() {
 
   const derivedDiff = (difficulty) => {
     let dff;
-    if (difficulty === 5) {
+    if (difficulty == 5) {
       return (dff = "easy");
     } else if (difficulty == 10) {
       return (dff = "medium");
@@ -82,29 +85,38 @@ function App() {
     }
   };
 
+  console.log(derivedDiff());
   return (
     <>
-      <div className="headcontainer">
-        <h3 className="select">Select Difficulty</h3>
-        <div className="diffbutton">
-          <div className="h4" onClick={() => handleDifficulty(5)}>
-            easy
+      {startgame ? (
+        ""
+      ) : (
+        <div className="headcontainer">
+          <h3 className="select">Select Difficulty</h3>
+          <div className="diffbutton">
+            <div className="h4" onClick={() => handleDifficulty(5)}>
+              easy
+            </div>
+            <div className="h4" onClick={() => handleDifficulty(10)}>
+              medium
+            </div>
+            <div className="h4" onClick={() => handleDifficulty(20)}>
+              hard
+            </div>
           </div>
-          <div className="h4" onClick={() => handleDifficulty(10)}>
-            medium
-          </div>
-          <div className="h4" onClick={() => handleDifficulty(20)}>
-            hard
-          </div>
+
+          <h2 className="h4" onClick={HandleStartGame}>
+            Start Game
+          </h2>
+
+          <h3>Difficulty selected:{derivedDiff}</h3>
         </div>
-        <h2 className="h4" onClick={HandleStartGame}>
-          Start Game
-        </h2>
-        <h3>Difficulty selected:{derivedDiff}</h3>
+      )}
+      <div className="scores">
+        <h2>Score:{clickedcard.length}</h2>
+        <h2>Highest Score:{highest}</h2>
       </div>
 
-      <h2>Score:{clickedcard.length}</h2>
-      <h2>Highest Score:{highest}</h2>
       {modal && <Modal score={score} />}
       <div className="container">
         {card.map((item, index) => (
