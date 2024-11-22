@@ -74,18 +74,23 @@ function App() {
     }
   };
 
-  const derivedDiff = (difficulty) => {
-    let dff;
-    if (difficulty == 5) {
-      return (dff = "easy");
-    } else if (difficulty == 10) {
-      return (dff = "medium");
-    } else {
-      return (dff = "hard");
-    }
+  const restartGame = () => {
+    setModal(false);
+    setStartgame(false);
   };
 
-  console.log(derivedDiff());
+  // const derivedDiff = (difficulty) => {
+  //   let dff;
+  //   if (difficulty == 5) {
+  //     return (dff = "easy");
+  //   } else if (difficulty == 10) {
+  //     return (dff = "medium");
+  //   } else {
+  //     return (dff = "hard");
+  //   }
+  // };
+
+  // console.log(derivedDiff());
   return (
     <>
       {startgame ? (
@@ -108,8 +113,6 @@ function App() {
           <h2 className="h4" onClick={HandleStartGame}>
             Start Game
           </h2>
-
-          <h3>Difficulty selected:{derivedDiff}</h3>
         </div>
       )}
       <div className="scores">
@@ -117,7 +120,7 @@ function App() {
         <h2>Highest Score:{highest}</h2>
       </div>
 
-      {modal && <Modal score={score} />}
+      {modal && <Modal score={score} onClick={restartGame} />}
       <div className="container">
         {card.map((item, index) => (
           <Card
