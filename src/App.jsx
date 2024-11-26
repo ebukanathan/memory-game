@@ -64,31 +64,35 @@ function App() {
       console.log("game over");
       setModal(true);
       setStartgame(true);
+      score > highest ? setHighest(score) : "";
 
-      setClickedcard([]);
+      // setClickedcard([]);
     } else {
       const shuffledCard = shuffle(card);
       setCard(shuffledCard);
       setClickedcard([...clickedcard, n]);
       console.log(clickedcard);
+      setScore((c) => c + 1);
     }
   };
 
   const restartGame = () => {
     setModal(false);
     setStartgame(false);
+    setScore(0);
   };
 
-  // const derivedDiff = (difficulty) => {
-  //   let dff;
-  //   if (difficulty == 5) {
-  //     return (dff = "easy");
-  //   } else if (difficulty == 10) {
-  //     return (dff = "medium");
-  //   } else {
-  //     return (dff = "hard");
-  //   }
-  // };
+  const derivedDiff = (n) => {
+    let dff;
+    if (n == 5) {
+      dff = "easy";
+    } else if (n == 10) {
+      dff = "medium";
+    } else {
+      dff = "hard";
+    }
+    return dff;
+  };
 
   // console.log(derivedDiff());
   return (
@@ -99,13 +103,13 @@ function App() {
         <div className="headcontainer">
           <h3 className="select">Select Difficulty</h3>
           <div className="diffbutton">
-            <div className="h4" onClick={() => handleDifficulty(5)}>
+            <div className="h4 choose" onClick={() => handleDifficulty(5)}>
               easy
             </div>
-            <div className="h4" onClick={() => handleDifficulty(10)}>
+            <div className="h4 choose" onClick={() => handleDifficulty(10)}>
               medium
             </div>
-            <div className="h4" onClick={() => handleDifficulty(20)}>
+            <div className="h4 choose" onClick={() => handleDifficulty(20)}>
               hard
             </div>
           </div>
@@ -113,11 +117,14 @@ function App() {
           <h2 className="h4" onClick={HandleStartGame}>
             Start Game
           </h2>
+          <h2>level:{derivedDiff(difficulty)}</h2>
         </div>
       )}
       <div className="scores">
-        <h2>Score:{clickedcard.length}</h2>
-        <h2>Highest Score:{highest}</h2>
+        <h2>Score:{score}</h2>
+        {highest}
+        {score}
+        <h2>Highest Score:{score}</h2>
       </div>
 
       {modal && <Modal score={score} onClick={restartGame} />}

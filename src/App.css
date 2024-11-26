@@ -52,6 +52,14 @@
   border: none;
   border-radius: 10px;
   font-weight: 800;
+  transition: background-color 0.2s ease-in;
+}
+.h4:hover {
+  background-color: rgb(56, 30, 4);
+  cursor: pointer;
+}
+.h4:active {
+  background-color: rgb(77, 68, 60);
 }
 
 .scores {
