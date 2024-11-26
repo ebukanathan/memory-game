@@ -59,12 +59,12 @@ function App() {
   //   getCard();
   // }, []);
 
+  const bestscore = score > highest ? setHighest(score) : highest;
   const handleAddclick = (n) => {
     if (clickedcard.includes(n)) {
       console.log("game over");
       setModal(true);
       setStartgame(true);
-      score > highest ? setHighest(score) : "";
 
       // setClickedcard([]);
     } else {
@@ -122,9 +122,8 @@ function App() {
       )}
       <div className="scores">
         <h2>Score:{score}</h2>
-        {highest}
-        {score}
-        <h2>Highest Score:{score}</h2>
+
+        <h2>Highest Score:{bestscore}</h2>
       </div>
 
       {modal && <Modal score={score} onClick={restartGame} />}
