@@ -125,8 +125,13 @@ function App() {
 
         <h2>Highest Score:{bestscore}</h2>
       </div>
+      {score == difficulty ? (
+        <Modal mode={"you won"} onClick={restartGame} />
+      ) : (
+        ""
+      )}
 
-      {modal && <Modal score={score} onClick={restartGame} />}
+      {modal && <Modal score={score} mode={"you lose"} onClick={restartGame} />}
       <div className="container">
         {card.map((item, index) => (
           <Card
