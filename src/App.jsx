@@ -24,7 +24,6 @@ function App() {
 
   const handleDifficulty = (n) => {
     setDifficulty(n);
-    console.log(difficulty);
   };
 
   const getCard = async (difficulty) => {
@@ -55,11 +54,8 @@ function App() {
     return array;
   }
 
-  // useEffect(() => {
-  //   getCard();
-  // }, []);
-
   const bestscore = score > highest ? setHighest(score) : highest;
+
   const handleAddclick = (n) => {
     if (clickedcard.includes(n)) {
       console.log("game over");
@@ -96,7 +92,7 @@ function App() {
 
   // console.log(derivedDiff());
   return (
-    <>
+    <div className="containerOne">
       {startgame ? (
         ""
       ) : (
@@ -142,7 +138,7 @@ function App() {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
